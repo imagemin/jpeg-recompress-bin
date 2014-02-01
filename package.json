@@ -1,0 +1,52 @@
+{
+  "name": "jpeg-recompress-bin",
+  "version": "0.0.1",
+  "description": "Jpeg-recompress wrapper that makes it seamlessly available as a local dependency on OS X, Linux, Windows.",
+  "main": "lib/jpeg-recompress",
+  "bin": {
+    "jpeg-recompress": "bin/jpeg-recompress.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha ./test/*.js",
+    "postinstall": "node lib/check.js"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/1000ch/node-jpeg-recompress-bin.git"
+  },
+  "keywords": [
+    "jpg",
+    "jpeg",
+    "compress",
+    "minify",
+    "optimize",
+    "img",
+    "image"
+  ],
+  "author": {
+    "name": "1000ch",
+    "email": "orz1000ch@gmail.com",
+    "url": "http://1000ch.net"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "chalk": "~0.4.0",
+    "bin-wrapper": "~0.1.9"
+  },
+  "devDependencies": {
+    "mocha": "~1.17.1"
+  },
+  "bugs": {
+    "url": "https://github.com/1000ch/node-jpeg-recompress-bin/issues"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ]
+}

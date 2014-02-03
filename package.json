@@ -1,6 +1,6 @@
 {
   "name": "jpeg-recompress-bin",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Jpeg-recompress wrapper that makes it seamlessly available as a local dependency on OS X, Linux, Windows.",
   "main": "lib/jpeg-recompress",
   "bin": {
@@ -10,8 +10,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha ./test/*.js",
-    "postinstall": "node lib/check.js"
+    "test": "mocha ./test/test-build.js ./test/test-path.js",
+    "postinstall": "node ./lib/build.js"
   },
   "engines": {
     "node": ">=0.10.0"

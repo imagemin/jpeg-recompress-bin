@@ -12,7 +12,7 @@ describe('jpeg-recompress.build()', function () {
     var bin = new Bin(options);
 
     bin.path = path.join(__dirname, '../vendor', bin.bin);
-    bin.buildScript = 'make && mv jpeg-recompress ' + path.join(__dirname, '../vendor');
+    bin.buildScript = 'make && mv ./jpeg-recompress ' + path.join(__dirname, '../vendor');
 
     bin.build(function () {
       var origCTime = fs.statSync(bin.path).ctime;

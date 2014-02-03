@@ -28,7 +28,7 @@ $ sudo apt-get install build-essential libjpeg-turbo8 libjpeg-turbo8-dev
 ### Mac OS X
 
 ```sh
-$ brew install libjpeg
+$ brew install libjpeg libjpeg-turbo
 ```
 
 ## Install

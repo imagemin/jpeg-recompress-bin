@@ -50,5 +50,5 @@ execFile(jpegRecompressPath, ['--quality high', '--min 60', 'input.jpg', 'output
 
 ## License
 
-This is MIT.
+This is licensed under BSD.
 [JPEG Archive](https://github.com/danielgtaylor/jpeg-archive) is also licensed under [MIT](https://github.com/danielgtaylor/jpeg-archive#license).

@@ -6,12 +6,10 @@ jpeg-recompress (part of [JPEG Archive](https://github.com/danielgtaylor/jpeg-ar
 
 > Compress JPEGs by re-encoding to the smallest JPEG quality while keeping perceived visual quality the same and by making sure huffman tables are optimized. This is a lossy operation, but the images are visually identical and it usually saves 30-70% of the size for JPEGs coming from a digital camera, particularly DSLRs. By default all EXIF/IPTC/XMP and color profile metadata is copied over, but this can be disabled to save more space if desired.
 
-[![Build Status](https://travis-ci.org/1000ch/node-jpeg-recompress-bin.png?branch=master)](https://travis-ci.org/1000ch/node-jpeg-recompress-bin)
-[![NPM version](https://badge.fury.io/js/jpeg-recompress-bin.png)](http://badge.fury.io/js/jpeg-recompress-bin)
-[![Dependency Status](https://david-dm.org/1000ch/node-jpeg-recompress-bin.png)](https://david-dm.org/1000ch/node-jpeg-recompress-bin)
-[![devDependency Status](https://david-dm.org/1000ch/node-jpeg-recompress-bin/dev-status.png)](https://david-dm.org/1000ch/node-jpeg-recompress-bin#info=devDependencies)
-
-[![NPM](https://nodei.co/npm/jpeg-recompress-bin.png)](https://nodei.co/npm/jpeg-recompress-bin/)
+[![Build Status](https://travis-ci.org/1000ch/node-jpeg-recompress-bin.svg?branch=master)](https://travis-ci.org/1000ch/node-jpeg-recompress-bin)
+[![NPM version](https://badge.fury.io/js/jpeg-recompress-bin.svg)](http://badge.fury.io/js/jpeg-recompress-bin)
+[![Dependency Status](https://david-dm.org/1000ch/node-jpeg-recompress-bin.svg)](https://david-dm.org/1000ch/node-jpeg-recompress-bin)
+[![devDependency Status](https://david-dm.org/1000ch/node-jpeg-recompress-bin/dev-status.svg)](https://david-dm.org/1000ch/node-jpeg-recompress-bin#info=devDependencies)
 
 ## Dependency
 

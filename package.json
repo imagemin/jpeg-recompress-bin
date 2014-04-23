@@ -1,6 +1,6 @@
 {
   "name": "jpeg-recompress-bin",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Jpeg-recompress wrapper that makes it seamlessly available as a local dependency on OS X, Linux, Windows.",
   "main": "lib/jpeg-recompress",
   "bin": {
@@ -47,6 +47,7 @@
   },
   "files": [
     "bin",
-    "lib"
+    "lib",
+    "vendor"
   ]
 }

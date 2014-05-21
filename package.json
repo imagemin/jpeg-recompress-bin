@@ -48,8 +48,7 @@
     "url": "https://github.com/1000ch/node-jpeg-recompress-bin/issues"
   },
   "files": [
-    "bin",
-    "lib",
-    "vendor"
+    "cli.js",
+    "index.js"
   ]
 }

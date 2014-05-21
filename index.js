@@ -9,9 +9,7 @@ var path = require('path');
 /**
  * Initialize a new BinWrapper
  */
-
 var bin = new BinWrapper()
-
   .src('https://raw.github.com/1000ch/node-jpeg-recompress-bin/master/vendor/osx/jpeg-recompress', 'darwin')
   .src('https://raw.github.com/1000ch/node-jpeg-recompress-bin/master/vendor/linux/jpeg-recompress', 'linux')
   .src('https://raw.github.com/1000ch/node-jpeg-recompress-bin/master/vendor/win/jpeg-recompress.exe', 'win32')
@@ -19,9 +17,8 @@ var bin = new BinWrapper()
   .use('jpeg-recompress');
 
 /**
-* Only run check if binary doesn't already exist
-*/
-
+ * Only run check if binary doesn't already exist
+ */
 fs.exists(bin.use(), function (exists) {
   if (!exists) {
     bin.run(['--version'], function (err) {
@@ -32,9 +29,9 @@ fs.exists(bin.use(), function (exists) {
           .src('https://github.com/danielgtaylor/jpeg-archive/archive/1.0.1.zip')
           .make('make && mkdir -p ' + bin.dest() + ' && mv ./jpeg-recompress ' + bin.use());
 
-        return builder.build(function (err) {
-          if (err) {
-            return console.log(chalk.red('✗ ' + err));
+        return builder.build(function (error) {
+          if (error) {
+            return console.log(chalk.red('✗ ' + error));
           }
 
           console.log(chalk.green('✓ jpeg-recompress built successfully'));
@@ -47,7 +44,6 @@ fs.exists(bin.use(), function (exists) {
 });
 
 /**
-* Module exports
-*/
-
+ * Module exports
+ */
 module.exports.path = bin.use();

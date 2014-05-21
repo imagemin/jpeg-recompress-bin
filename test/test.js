@@ -10,36 +10,36 @@ var path = require('path');
 var rm = require('rimraf');
 
 describe('jpegRecompress()', function () {
-  afterEach(function (cb) {
-    rm(path.join(__dirname, 'tmp'), cb);
+  afterEach(function (callback) {
+    rm(path.join(__dirname, 'tmp'), callback);
   });
 
   beforeEach(function () {
     fs.mkdirSync(path.join(__dirname, 'tmp'));
   });
 
-  it('should rebuild the jpeg-recompress binaries', function (cb) {
+  it('should rebuild the jpeg-recompress binaries', function (callback) {
     var tmp = path.join(__dirname, 'tmp');
     var builder = new BinBuild()
       .src('https://github.com/danielgtaylor/jpeg-archive/archive/1.0.1.zip')
       .make('make && mv ./jpeg-recompress ' + path.join(tmp, 'jpeg-recompress'));
 
-    builder.build(function (err) {
-      assert(!err);
+    builder.build(function (error) {
+      assert(!error);
       assert(fs.existsSync(path.join(tmp, 'jpeg-recompress')));
-      cb();
+      callback();
     });
   });
 
-  it('should return path to binary and verify that it is working', function (cb) {
+  it('should return path to binary and verify that it is working', function (callback) {
     var binPath = require('../').path;
 
-    binCheck(binPath, ['--version'], function (err, works) {
-      cb(assert.equal(works, true));
+    binCheck(binPath, ['--version'], function (error, works) {
+      callback(assert.equal(works, true));
     });
   });
 
-  it('should minify a JPEG', function (cb) {
+  it('should minify a JPEG', function (callback) {
     var binPath = require('../').path;
     var args = [
       '--quality',
@@ -54,7 +54,7 @@ describe('jpegRecompress()', function () {
       var src = fs.statSync(path.join(__dirname, 'fixtures/test.jpg')).size;
       var dest = fs.statSync(path.join(__dirname, 'tmp/test.jpg')).size;
 
-      cb(assert(dest < src));
+      callback(assert(dest < src));
     });
   });
 });

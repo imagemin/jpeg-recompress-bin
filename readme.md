@@ -39,9 +39,13 @@ $ npm install -g jpeg-recompress-bin
 
 ```js
 var execFile = require('child_process').execFile;
-var jpegRecompressPath = require('jpeg-recompress-bin').path;
+var jpegRecompress = require('jpeg-recompress-bin').path;
 
-execFile(jpegRecompressPath, ['--quality high', '--min 60', 'input.jpg', 'output.jpg'], function() {
+execFile(jpegRecompress, ['--quality high', '--min 60', 'input.jpg', 'output.jpg'], function(err) {
+  if (err) {
+    throw err;
+  }
+  
   console.log('Image minified');
 });
 ```

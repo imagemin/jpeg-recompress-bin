@@ -3,7 +3,6 @@
 
 var assert = require('assert');
 var binCheck = require('bin-check');
-var BinBuild = require('bin-build');
 var execFile = require('child_process').execFile;
 var fs = require('fs');
 var path = require('path');
@@ -18,24 +17,13 @@ describe('jpegRecompress()', function () {
     fs.mkdirSync(path.join(__dirname, 'tmp'));
   });
 
-  it('should rebuild the jpeg-recompress binaries', function (callback) {
-    var tmp = path.join(__dirname, 'tmp');
-    var builder = new BinBuild()
-      .src('https://github.com/danielgtaylor/jpeg-archive/archive/1.0.1.zip')
-      .make('make && mv ./jpeg-recompress ' + path.join(tmp, 'jpeg-recompress'));
-
-    builder.build(function (error) {
-      assert(!error);
-      assert(fs.existsSync(path.join(tmp, 'jpeg-recompress')));
-      callback();
-    });
-  });
-
   it('should return path to binary and verify that it is working', function (callback) {
     var binPath = require('../').path;
 
     binCheck(binPath, ['--version'], function (error, works) {
-      callback(assert.equal(works, true));
+      assert(!error);
+      assert.equal(works, true);
+      callback();
     });
   });
 
@@ -50,11 +38,13 @@ describe('jpegRecompress()', function () {
       path.join(__dirname, 'tmp/test.jpg')
     ];
 
-    execFile(binPath, args, function () {
+    execFile(binPath, args, function (error) {
       var src = fs.statSync(path.join(__dirname, 'fixtures/test.jpg')).size;
       var dest = fs.statSync(path.join(__dirname, 'tmp/test.jpg')).size;
 
-      callback(assert(dest < src));
+      assert(!error);
+      assert(dest < src);
+      callback();
     });
   });
 });

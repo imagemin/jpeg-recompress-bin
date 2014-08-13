@@ -9,8 +9,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --reporter spec --timeout 0",
-    "postinstall": "node index.js"
+    "test": "mocha --reporter spec --timeout 50000",
+    "postinstall": "node lib/install.js"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -35,12 +35,11 @@
   },
   "license": "BSD",
   "dependencies": {
-    "bin-build": "^0.1.1",
-    "bin-wrapper": "^0.3.4",
-    "chalk": "^0.5.1"
+    "bin-wrapper": "^0.4.0",
+    "log-symbols": "^1.0.0"
   },
   "devDependencies": {
-    "bin-check": "^0.1.4",
+    "bin-check": "^0.2.0",
     "mocha": "^1.19.0",
     "rimraf": "^2.2.8"
   },
@@ -49,6 +48,7 @@
   },
   "files": [
     "cli.js",
-    "index.js"
+    "index.js",
+    "lib"
   ]
 }

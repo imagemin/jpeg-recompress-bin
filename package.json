@@ -1,6 +1,6 @@
 {
   "name": "jpeg-recompress-bin",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "Jpeg-recompress wrapper that makes it seamlessly available as a local dependency on OS X, Linux, Windows.",
   "bin": {
     "jpeg-recompress": "cli.js"

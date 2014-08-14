@@ -21,7 +21,11 @@ describe('jpegRecompress()', function () {
     var binPath = require('../').path;
 
     binCheck(binPath, ['--version'], function (error, works) {
-      assert(!error);
+      if (error) {
+        callback(error);
+        return;
+      }
+      
       assert.equal(works, true);
       callback();
     });
@@ -41,8 +45,11 @@ describe('jpegRecompress()', function () {
     execFile(binPath, args, function (error) {
       var src = fs.statSync(path.join(__dirname, 'fixtures/test.jpg')).size;
       var dest = fs.statSync(path.join(__dirname, 'tmp/test.jpg')).size;
-
-      assert(!error);
+      
+      if (error) {
+        callback(error);
+        return;
+      }
       assert(dest < src);
       callback();
     });

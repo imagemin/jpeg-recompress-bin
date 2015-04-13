@@ -1,4 +1,4 @@
-# jpeg-recompress-bin [![Build Status](http://img.shields.io/travis/imagemin/jpeg-recompress-bin.svg?style=flat)](http://travis-ci.org/imagemin/jpeg-recompress-bin) [![Build status](https://ci.appveyor.com/api/projects/status/urrynklun4pluiwb)](https://ci.appveyor.com/project/ShinnosukeWatanabe/jpeg-recompress-bin)
+# jpeg-recompress-bin [![Build Status](https://travis-ci.org/imagemin/jpeg-recompress-bin.svg?branch=master)](https://travis-ci.org/imagemin/jpeg-recompress-bin) [![Build status](https://ci.appveyor.com/api/projects/status/urrynklun4pluiwb?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/jpeg-recompress-bin)
 
 
 
@@ -7,7 +7,7 @@
 
 ## Install
 
-```sh
+```
 $ npm install --save jpeg-recompress-bin
 ```
 
@@ -16,7 +16,7 @@ $ npm install --save jpeg-recompress-bin
 
 ```js
 var execFile = require('child_process').execFile;
-var jpegRecompress = require('jpeg-recompress-bin').path;
+var jpegRecompress = require('jpeg-recompress-bin');
 
 execFile(jpegRecompress, ['--quality high', '--min 60', 'input.jpg', 'output.jpg'], function (err) {
 	if (err) {
@@ -30,11 +30,11 @@ execFile(jpegRecompress, ['--quality high', '--min 60', 'input.jpg', 'output.jpg
 
 ## CLI
 
-```sh
+```
 $ npm install --global jpeg-recompress-bin
 ```
 
-```sh
+```
 $ jpeg-recompress --help
 ```
 

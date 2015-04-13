@@ -12,7 +12,7 @@ var tmp = path.join(__dirname, 'tmp');
 test('return path to binary and verify that it is working', function (t) {
 	t.plan(2);
 
-	binCheck(require('../').path, ['--version'], function (err, works) {
+	binCheck(require('../'), ['--version'], function (err, works) {
 		t.assert(!err);
 		t.assert(works);
 	});
@@ -33,7 +33,7 @@ test('minify a JPG', function (t) {
 	mkdir(tmp, function (err) {
 		t.assert(!err, err);
 
-		execFile(require('../').path, args, function (err) {
+		execFile(require('../'), args, function (err) {
 			t.assert(!err, err);
 
 			compareSize(src, dest, function (err, res) {

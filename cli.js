@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-var bin = require('./').path;
+var bin = require('./');
 var input = process.argv.slice(2);
 var spawn = require('child_process').spawn;
 

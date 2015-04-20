@@ -34,7 +34,7 @@
     "optimize"
   ],
   "dependencies": {
-    "bin-wrapper": "^2.0.1",
+    "bin-wrapper": "^3.0.0",
     "logalot": "^2.0.0"
   },
   "devDependencies": {

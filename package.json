@@ -25,15 +25,15 @@
       "url": "github.com/shinnn"
     }
   ],
-  "engines": {
-    "node": ">=0.10.0"
-  },
   "bin": {
     "jpeg-recompress": "cli.js"
   },
+  "engines": {
+    "node": ">=4"
+  },
   "scripts": {
     "postinstall": "node lib/install.js",
-    "test": "mocha --timeout 20000"
+    "test": "xo && ava"
   },
   "files": [
     "cli.js",
@@ -41,23 +41,26 @@
     "lib"
   ],
   "keywords": [
+    "imagemin",
     "compress",
     "image",
     "img",
     "jpeg",
     "jpg",
     "minify",
-    "optimize"
+    "optimize",
+    "jpeg-recompress"
   ],
   "dependencies": {
     "bin-wrapper": "^3.0.0",
     "logalot": "^2.0.0"
   },
   "devDependencies": {
-    "bin-check": "^1.0.0",
-    "compare-size": "^1.0.1",
-    "mkdirp": "^0.5.0",
-    "mocha": "^2.2.4",
-    "rimraf": "^2.2.8"
+    "ava": "*",
+    "bin-check": "^4.0.1",
+    "compare-size": "^3.0.0",
+    "execa": "^0.6.3",
+    "tempy": "^0.1.0",
+    "xo": "*"
   }
 }

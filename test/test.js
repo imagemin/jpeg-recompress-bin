@@ -1,48 +1,29 @@
-/*global afterEach,beforeEach,it*/
 'use strict';
+const path = require('path');
+const test = require('ava');
+const execa = require('execa');
+const tempy = require('tempy');
+const binCheck = require('bin-check');
+const compareSize = require('compare-size');
+const jpegRecompress = require('..');
 
-var assert = require('assert');
-var execFile = require('child_process').execFile;
-var path = require('path');
-var binCheck = require('bin-check');
-var compareSize = require('compare-size');
-var mkdirp = require('mkdirp');
-var rimraf = require('rimraf');
-var tmp = path.join(__dirname, 'tmp');
-
-beforeEach(function () {
-	mkdirp.sync(tmp);
+test('return path to binary and verify that it is working', async t => {
+	t.true(await binCheck(jpegRecompress, ['--version']));
 });
 
-afterEach(function () {
-	rimraf.sync(tmp);
-});
-
-it('return path to binary and verify that it is working', function (cb) {
-	binCheck(require('../'), ['--version'], function (err, works) {
-		assert(!err);
-		assert(works);
-		cb();
-	});
-});
-
-it('minify a JPG', function (cb) {
-	var src = path.join(__dirname, 'fixtures/test.jpg');
-	var dest = path.join(tmp, 'test.jpg');
-	var args = [
+test('minify a JPG', async t => {
+	const tmp = tempy.directory();
+	const src = path.join(__dirname, 'fixtures/test.jpg');
+	const dest = path.join(tmp, 'test.jpg');
+	const args = [
 		'--quality', 'high',
 		'--min', '60',
 		src,
 		dest
 	];
 
-	execFile(require('../'), args, function (err) {
-		assert(!err);
+	await execa(jpegRecompress, args);
+	const res = await compareSize(src, dest);
 
-		compareSize(src, dest, function (err, res) {
-			assert(!err);
-			assert(res[dest] < res[src]);
-			cb();
-		});
-	});
+	t.true(res[dest] < res[src]);
 });

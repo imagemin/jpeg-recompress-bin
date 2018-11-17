@@ -16,8 +16,10 @@ test('minify a JPG', async t => {
 	const src = path.join(__dirname, 'fixtures/test.jpg');
 	const dest = path.join(tmp, 'test.jpg');
 	const args = [
-		'--quality', 'high',
-		'--min', '60',
+		'--quality',
+		'high',
+		'--min',
+		'60',
 		src,
 		dest
 	];

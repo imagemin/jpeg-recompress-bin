@@ -1,6 +1,6 @@
 {
   "name": "jpeg-recompress-bin",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "jpeg-recompress wrapper that makes it seamlessly available as a local dependency",
   "license": "MIT",
   "repository": "imagemin/jpeg-recompress-bin",

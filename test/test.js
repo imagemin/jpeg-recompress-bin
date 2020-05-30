@@ -12,9 +12,9 @@ test('return path to binary and verify that it is working', async t => {
 });
 
 test('minify a JPG', async t => {
-	const tmp = tempy.directory();
+	const temporary = tempy.directory();
 	const src = path.join(__dirname, 'fixtures/test.jpg');
-	const dest = path.join(tmp, 'test.jpg');
+	const dest = path.join(temporary, 'test.jpg');
 	const args = [
 		'--quality',
 		'high',
@@ -25,7 +25,7 @@ test('minify a JPG', async t => {
 	];
 
 	await execa(jpegRecompress, args);
-	const res = await compareSize(src, dest);
+	const result = await compareSize(src, dest);
 
-	t.true(res[dest] < res[src]);
+	t.true(result[dest] < result[src]);
 });

@@ -10,6 +10,11 @@ const compareSize = require('compare-size');
 const jpegRecompress = require('..');
 
 test('rebuild the jpeg-recompress binaries', async t => {
+	if (process.platform === 'win32' || process.platform === 'linux') {
+		t.pass('Build for win32 and linux is not supported');
+		return;
+	}
+
 	const temporary = tempy.directory();
 
 	await binBuild.file(path.resolve(__dirname, '../vendor/source/jpeg-archive-2.2.0.tar.gz'), [

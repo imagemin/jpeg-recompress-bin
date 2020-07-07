@@ -38,7 +38,7 @@ before_install:
         cd $HOME/jpeg-archive
         CC='/c/ProgramData/chocolatey/bin/x86_64-w64-mingw32-gcc.exe' /c/ProgramData/chocolatey/bin/mingw32-make.exe
         ./jpeg-recompress.exe --version
-        cp jpeg-recompress.exe $HOME/build/OpenSourceCommerce/jpeg-recompress-bin/vendor/jpeg-recompress.exe
+        cp jpeg-recompress.exe $HOME/build/imagemin/jpeg-recompress-bin/vendor/jpeg-recompress.exe
       ;;
       osx)
         brew install mozjpeg
@@ -49,7 +49,7 @@ before_install:
         CC=gcc make test
         ./jpeg-recompress --version
         cp jpeg-recompress darwin-jpeg-recompress
-        cp jpeg-recompress $HOME/build/OpenSourceCommerce/jpeg-recompress-bin/vendor/darwin-jpeg-recompress
+        cp jpeg-recompress $HOME/build/imagemin/jpeg-recompress-bin/vendor/darwin-jpeg-recompress
       ;;
       linux)
         echo "Building for Linux"
@@ -87,10 +87,10 @@ before_install:
         CC=gcc make test
         ./jpeg-recompress --version
         cp jpeg-recompress linux-jpeg-recompress
-        cp jpeg-recompress $HOME/build/OpenSourceCommerce/jpeg-recompress-bin/vendor/linux-jpeg-recompress
+        cp jpeg-recompress $HOME/build/imagemin/jpeg-recompress-bin/vendor/linux-jpeg-recompress
       ;;
     esac
-  - cd $HOME/build/OpenSourceCommerce/jpeg-recompress-bin
+  - cd $HOME/build/imagemin/jpeg-recompress-bin
 compiler:
   - gcc
 install:

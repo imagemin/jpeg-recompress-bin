@@ -8,4 +8,105 @@ os:
   - windows
   - osx
 before_install:
-  - if [[ $TRAVIS_OS_NAME == 'osx' ]]; then brew install mozjpeg; fi
+  - |
+    case $TRAVIS_OS_NAME in
+      windows)
+        choco install -y nasm
+        echo "Compiling Zlib"
+        git clone https://github.com/madler/zlib.git $HOME/zlib
+        cd $HOME/zlib
+        cmake -G"MSYS Makefiles" -DCMAKE_MAKE_PROGRAM="/c/ProgramData/chocolatey/bin/mingw32-make.exe" -DCMAKE_C_COMPILER='/c/ProgramData/chocolatey/bin/x86_64-w64-mingw32-gcc.exe'  -DCMAKE_AR="/c/ProgramData/chocolatey/bin/ar.exe" .
+        /c/ProgramData/chocolatey/bin/mingw32-make.exe
+        /c/ProgramData/chocolatey/bin/mingw32-make.exe test
+        cd ..
+        echo "Compiling Libpng"
+        git clone https://github.com/glennrp/libpng $HOME/libpng
+        cd $HOME/libpng
+        cmake -G"MSYS Makefiles" -DCMAKE_MAKE_PROGRAM="/c/ProgramData/chocolatey/bin/mingw32-make.exe" -DCMAKE_C_COMPILER='/c/ProgramData/chocolatey/bin/x86_64-w64-mingw32-gcc.exe'  -DCMAKE_AR="/c/ProgramData/chocolatey/bin/ar.exe" -DZLIB_LIBRARY="$HOME/zlib/libzlib.dll.a" -DZLIB_INCLUDE_DIR="$HOME/zlib" .
+        /c/ProgramData/chocolatey/bin/mingw32-make.exe
+        cp scripts/pnglibconf.h.prebuilt pnglibconf.h
+        cp scripts/makefile.msys makefile
+        /c/ProgramData/chocolatey/bin/mingw32-make.exe test
+        cd ..
+        echo "Compiling Mozjpeg"
+        git clone https://github.com/mozilla/mozjpeg.git $HOME/mozjpeg
+        cd $HOME/mozjpeg
+        cmake -G"MSYS Makefiles" -DCMAKE_MAKE_PROGRAM="/c/ProgramData/chocolatey/bin/mingw32-make.exe" -DCMAKE_C_COMPILER='/c/ProgramData/chocolatey/bin/x86_64-w64-mingw32-gcc.exe' -DZLIB_LIBRARY="$HOME/zlib/libzlib.dll.a" -DZLIB_INCLUDE_DIR="$HOME/zlib" -DPNG_LIBRARY="$HOME/libpng/libpng16.a" -DPNG_PNG_INCLUDE_DIR="$HOME/libpng" -DCMAKE_AR="/c/ProgramData/chocolatey/bin/ar.exe" -DWITH_JPEG8=1 .
+        /c/ProgramData/chocolatey/bin/mingw32-make.exe
+        echo "Compiling Jpeg Archive"
+        git clone https://github.com/danielgtaylor/jpeg-archive.git $HOME/jpeg-archive
+        cd $HOME/jpeg-archive
+        CC='/c/ProgramData/chocolatey/bin/x86_64-w64-mingw32-gcc.exe' /c/ProgramData/chocolatey/bin/mingw32-make.exe
+        ./jpeg-recompress.exe --version
+        cp jpeg-recompress.exe $HOME/build/imagemin/jpeg-recompress-bin/vendor/jpeg-recompress.exe
+      ;;
+      osx)
+        brew install mozjpeg
+        echo "Compiling Jpeg Archive"
+        git clone https://github.com/danielgtaylor/jpeg-archive.git $HOME/jpeg-archive
+        cd $HOME/jpeg-archive
+        CC=gcc make
+        CC=gcc make test
+        ./jpeg-recompress --version
+        cp jpeg-recompress darwin-jpeg-recompress
+        cp jpeg-recompress $HOME/build/imagemin/jpeg-recompress-bin/vendor/darwin-jpeg-recompress
+      ;;
+      linux)
+        echo "Building for Linux"
+        sudo apt-get install -y cmake git nasm
+        echo "Compiling Zlib"
+        git clone https://github.com/madler/zlib.git $HOME/zlib
+        cd $HOME/zlib
+        cmake -G"Unix Makefiles"
+        make
+        make test
+        sudo make install
+        cd ..
+        echo "Compiling Libpng"
+        git clone https://github.com/glennrp/libpng $HOME/libpng
+        cd $HOME/libpng
+        ./configure
+        cmake -G"Unix Makefiles" .
+        make
+        cp scripts/pnglibconf.h.prebuilt pnglibconf.h
+        cp scripts/makefile.linux makefile
+        make test
+        sudo make install
+        echo "Compiling Mozjpeg"
+        git clone https://github.com/mozilla/mozjpeg.git $HOME/mozjpeg
+        cd $HOME/mozjpeg
+        mkdir build
+        cd build
+        cmake -G"Unix Makefiles" -DPNG_SUPPORTED=TRUE -DWITH_JPEG8=1 ../
+        make SHARED=0 CC='gcc -static'
+        sudo make install
+        echo "Compiling Jpeg Archive"
+        git clone https://github.com/danielgtaylor/jpeg-archive.git $HOME/jpeg-archive
+        cd $HOME/jpeg-archive
+        CC=gcc make
+        CC=gcc make test
+        ./jpeg-recompress --version
+        cp jpeg-recompress linux-jpeg-recompress
+        cp jpeg-recompress $HOME/build/imagemin/jpeg-recompress-bin/vendor/linux-jpeg-recompress
+      ;;
+    esac
+  - cd $HOME/build/imagemin/jpeg-recompress-bin
+compiler:
+  - gcc
+install:
+  - npm install
+deploy:
+  provider: releases
+  tag_name: $TRAVIS_TAG
+  target_commitish: $TRAVIS_COMMIT
+  name: $TRAVIS_TAG
+  overwrite: true
+  skip_cleanup: true
+  api_key: $github_token
+  file_glob: true
+  file:
+    - $HOME/jpeg-archive/linux-jpeg-recompress
+    - $HOME/jpeg-archive/darwin-jpeg-recompress
+    - $HOME/jpeg-archive/jpeg-recompress.exe
+  on:
+    tags: true

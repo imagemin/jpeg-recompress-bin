@@ -39,7 +39,6 @@ before_install:
         CC='/c/ProgramData/chocolatey/bin/x86_64-w64-mingw32-gcc.exe' /c/ProgramData/chocolatey/bin/mingw32-make.exe
         ./jpeg-recompress.exe --version
         cp jpeg-recompress.exe $HOME/build/OpenSourceCommerce/jpeg-recompress-bin/vendor/jpeg-recompress.exe
-        ls -la $HOME/build/OpenSourceCommerce/jpeg-recompress-bin
       ;;
       osx)
         brew install mozjpeg
@@ -51,7 +50,6 @@ before_install:
         ./jpeg-recompress --version
         cp jpeg-recompress darwin-jpeg-recompress
         cp jpeg-recompress $HOME/build/OpenSourceCommerce/jpeg-recompress-bin/vendor/darwin-jpeg-recompress
-        ls -la $HOME/build/OpenSourceCommerce/jpeg-recompress-bin
       ;;
       linux)
         echo "Building for Linux"
@@ -90,7 +88,6 @@ before_install:
         ./jpeg-recompress --version
         cp jpeg-recompress linux-jpeg-recompress
         cp jpeg-recompress $HOME/build/OpenSourceCommerce/jpeg-recompress-bin/vendor/linux-jpeg-recompress
-        ls -la $HOME/build/OpenSourceCommerce/jpeg-recompress-bin
       ;;
     esac
   - cd $HOME/build/OpenSourceCommerce/jpeg-recompress-bin

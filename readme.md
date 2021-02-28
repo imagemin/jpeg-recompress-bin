@@ -1,4 +1,4 @@
-# jpeg-recompress-bin [![Build Status](https://travis-ci.org/imagemin/jpeg-recompress-bin.svg?branch=master)](https://travis-ci.org/imagemin/jpeg-recompress-bin)
+# jpeg-recompress-bin ![GitHub Actions Status](https://github.com/imagemin/jpeg-recompress-bin/workflows/test/badge.svg?branch=master)
 
 > Compress JPEGs by re-encoding to the smallest JPEG quality while keeping perceived visual quality the same and by making sure huffman tables are optimized
 

@@ -1,13 +1,14 @@
-'use strict';
-const fs = require('fs');
-const path = require('path');
-const test = require('ava');
-const execa = require('execa');
-const tempy = require('tempy');
-const binCheck = require('bin-check');
-const binBuild = require('bin-build');
-const compareSize = require('compare-size');
-const jpegRecompress = require('..');
+import fs from 'node:fs';
+import path from 'node:path';
+import process from 'node:process';
+import {fileURLToPath} from 'node:url';
+import test from 'ava';
+import execa from 'execa';
+import tempy from 'tempy';
+import binCheck from 'bin-check';
+import binBuild from 'bin-build';
+import compareSize from 'compare-size';
+import jpegRecompress from '../index.js';
 
 test('rebuild the jpeg-recompress binaries', async t => {
 	if (process.platform === 'win32' || process.platform === 'linux') {
@@ -16,10 +17,11 @@ test('rebuild the jpeg-recompress binaries', async t => {
 	}
 
 	const temporary = tempy.directory();
+	const source = fileURLToPath(new URL('../vendor/source/jpeg-archive-2.2.0.tar.gz', import.meta.url));
 
-	await binBuild.file(path.resolve(__dirname, '../vendor/source/jpeg-archive-2.2.0.tar.gz'), [
+	await binBuild.file(source, [
 		`mkdir -p ${temporary}`,
-		`make && mv jpeg-recompress ${path.join(temporary, 'jpeg-recompress')}`
+		`make && mv jpeg-recompress ${path.join(temporary, 'jpeg-recompress')}`,
 	]);
 
 	t.true(fs.existsSync(path.join(temporary, 'jpeg-recompress')));
@@ -31,7 +33,7 @@ test('return path to binary and verify that it is working', async t => {
 
 test('minify a JPG', async t => {
 	const temporary = tempy.directory();
-	const src = path.join(__dirname, 'fixtures/test.jpg');
+	const src = fileURLToPath(new URL('fixtures/test.jpg', import.meta.url));
 	const dest = path.join(temporary, 'test.jpg');
 	const args = [
 		'--quality',
@@ -39,7 +41,7 @@ test('minify a JPG', async t => {
 		'--min',
 		'60',
 		src,
-		dest
+		dest,
 	];
 
 	await execa(jpegRecompress, args);

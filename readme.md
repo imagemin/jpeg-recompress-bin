@@ -1,4 +1,4 @@
-# jpeg-recompress-bin ![GitHub Actions Status](https://github.com/imagemin/jpeg-recompress-bin/workflows/test/badge.svg?branch=master)
+# jpeg-recompress-bin ![GitHub Actions Status](https://github.com/imagemin/jpeg-recompress-bin/workflows/test/badge.svg?branch=main)
 
 > Compress JPEGs by re-encoding to the smallest JPEG quality while keeping perceived visual quality the same and by making sure huffman tables are optimized
 
@@ -15,10 +15,10 @@ $ npm install --save jpeg-recompress-bin
 ## Usage
 
 ```js
-const {execFile} = require('child_process');
-const jpegRecompress = require('jpeg-recompress-bin');
+import {execFile} from 'node:child_process';
+import jpegRecompress from 'jpeg-recompress-bin';
 
-execFile(jpegRecompress, ['--quality high', '--min 60', 'input.jpg', 'output.jpg'], err => {
+execFile(jpegRecompress, ['--quality high', '--min 60', 'input.jpg', 'output.jpg'], error => {
 	console.log('Image minified');
 });
 ```
